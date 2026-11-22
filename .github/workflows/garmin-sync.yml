@@ -1,0 +1,31 @@
+# Pulls Garmin sleep / HRV / resting HR / Body Battery into the private sync Gist.
+name: Garmin sync
+
+on:
+  schedule:
+    - cron: '20 5 * * *'   # 06:20 Brussels (winter time)
+    - cron: '20 17 * * *'  # 18:20 Brussels
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: garmin-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pull Garmin data into the gist
+        env:
+          GARMIN_API_KEY: ${{ secrets.GARMIN_API_KEY }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
+        run: node scripts/garmin-sync.mjs
