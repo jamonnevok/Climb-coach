@@ -207,16 +207,44 @@ class FakeTransport implements BleTransport {
   }
 }
 
+const starts = (t: FakeTransport) => t.written.filter((w) => w[0] === CMD.START_WEIGHT_MEAS).length;
+const flush = async (n = 6) => {
+  for (let i = 0; i < n; i++) await new Promise((r) => setTimeout(r, 0));
+};
+
 describe('Progressor client', () => {
-  it('connects, reads battery, streams, tares in software, records a curve', async () => {
+  it('starts the force stream automatically on connect (live kg without extra tap)', async () => {
     const t = new FakeTransport();
     const p = new Progressor(t, { sleep: async () => undefined });
     expect(await p.connect(null)).toBe(true);
     expect(p.snapshot.batteryMv).toBe(4048);
-    await p.startStream();
-    expect(t.written.some((w) => w[0] === 101)).toBe(true);
+    expect(p.snapshot.streaming).toBe(true);
+    expect(starts(t)).toBe(1);
+    t.push(weightPacket([[12.5, 0]]));
+    expect(p.snapshot.currentKg).toBe(12.5);
+  });
+
+  it('auto-zeroes at stream start only when nothing hangs on the device', async () => {
+    const t = new FakeTransport();
+    const p = new Progressor(t, { sleep: async () => undefined });
+    await p.connect(null);
+    t.push(weightPacket(Array.from({ length: 25 }, (_, i) => [0.4, i * 12_500] as [number, number])));
+    t.push(weightPacket([[20.4, 400_000]]));
+    expect(p.snapshot.currentKg).toBe(20);
+    const t2 = new FakeTransport();
+    const p2 = new Progressor(t2, { sleep: async () => undefined });
+    await p2.connect(null);
+    t2.push(weightPacket(Array.from({ length: 25 }, (_, i) => [30, i * 12_500] as [number, number])));
+    expect(p2.snapshot.currentKg).toBe(30); // already loaded at start: no auto-zero
+  });
+
+  it('software tare and curve recording', async () => {
+    const t = new FakeTransport();
+    const p = new Progressor(t, { sleep: async () => undefined });
+    await p.connect(null);
     t.push(weightPacket([[1.0, 0], [1.0, 100_000], [1.0, 200_000], [1.0, 300_000]]));
     await p.tare();
+    await p.tare(); // repeated tare must not shift the zero again
     p.startRecording();
     t.push(weightPacket([[31.0, 400_000], [41.0, 500_000], [36.0, 600_000]]));
     const curve = p.stopRecording();
@@ -226,17 +254,27 @@ describe('Progressor client', () => {
     expect(p.snapshot.currentKg).toBe(35);
   });
 
+  it('startRecording restarts a stopped stream', async () => {
+    const t = new FakeTransport();
+    const p = new Progressor(t, { sleep: async () => undefined });
+    await p.connect(null);
+    await p.stopStream();
+    p.startRecording();
+    await flush();
+    expect(p.snapshot.streaming).toBe(true);
+    expect(starts(t)).toBe(2);
+  });
+
   it('auto-reconnects after an unexpected disconnect and resumes the stream', async () => {
     const t = new FakeTransport();
     const p = new Progressor(t, { sleep: async () => undefined });
     await p.connect(null);
-    await p.startStream();
     t.failConnects = 1;
     t.drop();
-    await new Promise((r) => setTimeout(r, 0));
-    await new Promise((r) => setTimeout(r, 0));
+    await flush();
     expect(p.snapshot.state).toBe('connected');
-    expect(t.written.filter((w) => w[0] === 101)).toHaveLength(2);
+    expect(p.snapshot.streaming).toBe(true);
+    expect(starts(t)).toBe(2);
   });
 
   it('reports "lost" with wake-up instructions after all retries fail', async () => {
@@ -245,7 +283,7 @@ describe('Progressor client', () => {
     await p.connect(null);
     t.failConnects = 99;
     t.drop();
-    for (let i = 0; i < 10; i++) await new Promise((r) => setTimeout(r, 0));
+    await flush(10);
     expect(p.snapshot.state).toBe('lost');
     expect(p.snapshot.error!.includes('Press the Progressor button')).toBe(true);
   });
