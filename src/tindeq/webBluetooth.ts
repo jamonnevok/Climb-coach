@@ -87,8 +87,9 @@ export class WebBluetoothTransport implements BleTransport {
   async write(bytes: Uint8Array): Promise<void> {
     if (!this.control) throw new Error('Progressor not connected');
     const c = this.control as BluetoothRemoteGATTCharacteristic & { writeValueWithResponse?: (v: BufferSource) => Promise<void> };
-    if (typeof c.writeValueWithResponse === 'function') await c.writeValueWithResponse(bytes);
-    else await c.writeValue(bytes);
+       const data = new Uint8Array(bytes); // plain ArrayBuffer copy (stricter BufferSource typing in recent TypeScript)
+    if (typeof c.writeValueWithResponse === 'function') await c.writeValueWithResponse(data);
+    else await c.writeValue(data);
   }
 }
 
