@@ -2,9 +2,10 @@
  * Progressor client. Transport-agnostic (see BleTransport) so the logic is unit-tested with a
  * fake transport; the browser uses WebBluetoothTransport (webBluetooth.ts).
  *
- * Features: connect / one-tap reconnect, stream force, software tare (default) or device tare,
- * battery, low-power warning, automatic reconnection attempts after an unexpected disconnect,
- * recording of force curves with live peak.
+ * Features: connect / one-tap reconnect, force stream started AUTOMATICALLY on connect (live kg
+ * everywhere without an extra tap), automatic zero at stream start when nothing hangs on the
+ * device, software tare (default) or device tare, battery, low-power warning, automatic
+ * reconnection after an unexpected disconnect, recording of force curves with live peak.
  *
  * Auto-shutdown: the Progressor powers off after ~10 min of inactivity when NOT connected
  * (published API notes). If reconnection fails, the UI asks the user to press the device button.
@@ -41,6 +42,9 @@ export interface ProgressorSnapshot {
 type Listener = (s: ProgressorSnapshot) => void;
 type SampleListener = (p: Pt) => void;
 
+/** Samples used for the automatic zero at stream start (~0.3 s at 80 Hz). */
+const AUTO_TARE_SAMPLES = 25;
+
 export class Progressor {
   private snap: ProgressorSnapshot = {
     state: 'disconnected',
@@ -61,6 +65,7 @@ export class Progressor {
   private tareOffset = 0;
   private recent: Pt[] = [];
   private recording: Pt[] | null = null;
+  private autoTareBuf: number[] | null = null;
   private manualDisconnect = false;
   private wantStream = false;
   private sleep: (ms: number) => Promise<void>;
@@ -101,12 +106,17 @@ export class Progressor {
       const d = await this.transport.connect({ rememberedId, interactive });
       this.set({ state: 'connected', deviceId: d.id, deviceName: d.name });
       await this.refreshBattery().catch(() => undefined);
-      if (this.wantStream) await this.startStream();
-      return true;
     } catch (e) {
       this.set({ state: 'disconnected', error: e instanceof Error ? e.message : String(e) });
       return false;
     }
+    // Live force from the moment the device is connected.
+    try {
+      await this.startStream();
+    } catch (e) {
+      this.set({ error: `Connected, but the force stream did not start: ${e instanceof Error ? e.message : String(e)}` });
+    }
+    return true;
   }
 
   async disconnect(): Promise<void> {
@@ -181,8 +191,14 @@ export class Progressor {
     this.wantStream = true;
     this.unwrap.reset();
     this.recent = [];
+    this.autoTareBuf = [];
     await this.send(CMD.START_WEIGHT_MEAS);
     this.set({ streaming: true, peakKg: 0 });
+  }
+
+  /** Start the stream if connected and not already streaming (safe to call repeatedly). */
+  async ensureStream(): Promise<void> {
+    if (this.snap.state === 'connected' && !this.snap.streaming) await this.startStream();
   }
 
   async stopStream(): Promise<void> {
@@ -209,7 +225,8 @@ export class Progressor {
     }
     const lastT = this.recent.length ? this.recent[this.recent.length - 1].t : 0;
     const win = this.recent.filter((p) => p.t >= lastT - 500);
-    if (win.length) this.tareOffset += win.reduce((a, p) => a + p.f, 0) / win.length;
+    if (win.length) this.tareOffset = win.reduce((a, p) => a + p.f, 0) / win.length; // raw mean = new zero
+    this.autoTareBuf = null;
     this.set({ currentKg: 0, peakKg: 0 });
   }
 
@@ -217,10 +234,11 @@ export class Progressor {
     this.set({ peakKg: 0 });
   }
 
-  /** Begin recording a force curve (e.g. at the start of a work phase / test). */
+  /** Begin recording a force curve (e.g. at the start of a work phase / test). Starts the stream if needed. */
   startRecording(): void {
     this.recording = [];
     this.set({ peakKg: 0 });
+    void this.ensureStream().catch((e) => this.set({ error: e instanceof Error ? e.message : String(e) }));
   }
 
   /** Stop recording; returns points with t relative to the first recorded sample. */
@@ -245,6 +263,15 @@ export class Progressor {
         for (const s of msg.samples) {
           const raw: Pt = { t: this.unwrap.toMs(s.us), f: s.kg };
           this.recent.push(raw);
+          // Automatic zero at stream start, only if nothing hangs on the device.
+          if (this.autoTareBuf) {
+            this.autoTareBuf.push(s.kg);
+            if (this.autoTareBuf.length >= AUTO_TARE_SAMPLES) {
+              const buf = this.autoTareBuf;
+              this.autoTareBuf = null;
+              if (Math.max(...buf.map(Math.abs)) < thresholds.tindeq.loadOnsetKg) this.tareOffset = buf.reduce((a, x) => a + x, 0) / buf.length;
+            }
+          }
           const p: Pt = { t: raw.t, f: s.kg - this.tareOffset };
           cur = p.f;
           if (p.f > peakKg) peakKg = p.f;

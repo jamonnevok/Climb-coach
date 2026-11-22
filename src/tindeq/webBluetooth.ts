@@ -84,12 +84,27 @@ export class WebBluetoothTransport implements BleTransport {
     this.data = null;
   }
 
+  /** Write a command; falls back to write-without-response if the firmware rejects write-with-response. */
   async write(bytes: Uint8Array): Promise<void> {
     if (!this.control) throw new Error('Progressor not connected');
-    const c = this.control as BluetoothRemoteGATTCharacteristic & { writeValueWithResponse?: (v: BufferSource) => Promise<void> };
-       const data = new Uint8Array(bytes); // plain ArrayBuffer copy (stricter BufferSource typing in recent TypeScript)
-    if (typeof c.writeValueWithResponse === 'function') await c.writeValueWithResponse(data);
-    else await c.writeValue(data);
+    const data = new Uint8Array(bytes); // plain ArrayBuffer copy (stricter BufferSource typing in recent TypeScript)
+    const c = this.control as BluetoothRemoteGATTCharacteristic & {
+      writeValueWithResponse?: (v: BufferSource) => Promise<void>;
+      writeValueWithoutResponse?: (v: BufferSource) => Promise<void>;
+    };
+    if (typeof c.writeValueWithResponse === 'function') {
+      try {
+        await c.writeValueWithResponse(data);
+        return;
+      } catch {
+        /* try the other write type below */
+      }
+    }
+    if (typeof c.writeValueWithoutResponse === 'function') {
+      await c.writeValueWithoutResponse(data);
+      return;
+    }
+    await c.writeValue(data);
   }
 }
 
