@@ -238,16 +238,21 @@ export function EvidenceBadge({ level }: { level: EvidenceLevel }) {
   return <Badge cls={e.cls}>{e.label}</Badge>;
 }
 
+/**
+ * References are collapsed by default: a small "References (n)" line that expands on tap.
+ * Nothing is shown when there is no reference (the evidence badge already says "Coaching practice").
+ */
 export function ReferenceList({ ids }: { ids: string[] }) {
-  if (!ids.length) return <p className="text-xs text-muted">No peer-reviewed reference: coaching practice.</p>;
+  if (!ids.length) return null;
   return (
-    <ul className="space-y-1">
-      {ids.map((id) => (
-        <li key={id} className="text-xs text-muted">
-          {references[id]?.citation ?? id}
-        </li>
-      ))}
-    </ul>
+    <details className="text-xs text-muted">
+      <summary className="cursor-pointer select-none py-1">References ({ids.length})</summary>
+      <ul className="space-y-1 mt-1">
+        {ids.map((id) => (
+          <li key={id}>{references[id]?.citation ?? id}</li>
+        ))}
+      </ul>
+    </details>
   );
 }
 
