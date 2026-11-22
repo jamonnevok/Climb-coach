@@ -1,9 +1,9 @@
 /**
- * PLAN: macro timeline, weekly cards (drag & drop between days — long-press on touch),
+ * PLAN: macro timeline, weekly cards (tap "Move" on a session, then tap the target day),
  * session editor (swap / edit sets, reps, loads), unavailable & outdoor days, validate,
  * projected ACWR, projecting phases, version history.
  */
-import { useMemo, useRef, useState, type PointerEvent as RPointerEvent } from 'react';
+import { useMemo, useState } from 'react';
 import { addDays, startOfWeek, type ISODate } from '../../lib/dates';
 import type { ExerciseDef, Plan, PlannedItem, PlannedSession, PlanWeek } from '../../data/schema';
 import { addItem, findSession, moveSession, removeItem, swapExercise, toggleDayFlag, updateItem } from '../../engine/planOps';
@@ -271,76 +271,48 @@ function SessionEditor({ sessionId, plan, onClose, onPlan }: { sessionId: string
   );
 }
 
-/* ---------------- Week board with drag & drop ---------------- */
-
-interface DragState {
-  id: string;
-  x: number;
-  y: number;
-  title: string;
-}
+/* ---------------- Week board: tap "Move", then tap a day ---------------- */
 
 function WeekBoard({ week, plan, onPlan, onOpen }: { week: PlanWeek; plan: Plan; onPlan: (p: Plan, reason: string, v?: RuleViolation[]) => void; onOpen: (id: string) => void }) {
   const { d } = useStore();
-  const [drag, setDrag] = useState<DragState | null>(null);
-  const [over, setOver] = useState<string | null>(null);
-  const timer = useRef<number | null>(null);
-  const start = useRef<{ x: number; y: number } | null>(null);
+  const [moving, setMoving] = useState<string | null>(null);
   const days = Array.from({ length: 7 }, (_, i) => addDays(week.startDate, i));
+  const movingSession = moving ? week.sessions.find((s) => s.id === moving) : undefined;
 
-  const dateAt = (x: number, y: number): string | null => {
-    const el = document.elementFromPoint(x, y)?.closest('[data-date]') as HTMLElement | null;
-    return el?.dataset.date ?? null;
-  };
-  const onDown = (s: PlannedSession) => (e: RPointerEvent) => {
-    if (s.status !== 'planned') return;
-    start.current = { x: e.clientX, y: e.clientY };
-    const x = e.clientX;
-    const y = e.clientY;
-    timer.current = window.setTimeout(() => {
-      setDrag({ id: s.id, x, y, title: s.title });
-      if ('vibrate' in navigator) navigator.vibrate(30);
-    }, e.pointerType === 'mouse' ? 120 : 350);
-  };
-  const onMove = (e: RPointerEvent) => {
-    if (!drag) {
-      if (start.current && Math.hypot(e.clientX - start.current.x, e.clientY - start.current.y) > 10 && timer.current) {
-        clearTimeout(timer.current);
-        timer.current = null;
-      }
-      return;
+  const dropOn = (dt: string) => {
+    if (!movingSession) return;
+    if (dt !== movingSession.date) {
+      const r = moveSession(plan, movingSession.id, dt);
+      onPlan(r.plan, `${movingSession.title} moved to ${dt}`, r.violations);
     }
-    e.preventDefault();
-    setDrag({ ...drag, x: e.clientX, y: e.clientY });
-    setOver(dateAt(e.clientX, e.clientY));
-  };
-  const onUp = (s: PlannedSession) => (e: RPointerEvent) => {
-    if (timer.current) {
-      clearTimeout(timer.current);
-      timer.current = null;
-    }
-    if (drag) {
-      const to = dateAt(e.clientX, e.clientY);
-      if (to && to !== s.date) {
-        const r = moveSession(plan, drag.id, to);
-        onPlan(r.plan, `${s.title} moved to ${to}`, r.violations);
-      }
-      setDrag(null);
-      setOver(null);
-    } else if (start.current && Math.hypot(e.clientX - start.current.x, e.clientY - start.current.y) < 10) {
-      onOpen(s.id);
-    }
-    start.current = null;
+    setMoving(null);
   };
 
   return (
-    <div className="space-y-1 select-none" onPointerMove={onMove}>
-      {days.map((dt) => {
+    <div className="space-y-1 select-none">
+      {movingSession && (
+        <div className="sticky top-0 z-10 flex items-center justify-between gap-2 rounded-xl bg-accent text-black px-3 py-2 text-sm">
+          <span>
+            Tap a day to move <b>{movingSession.title}</b>
+          </span>
+          <button className="font-semibold underline" onClick={() => setMoving(null)}>
+            Cancel
+          </button>
+        </div>
+      )}
+      {days.map((dt, idx) => {
         const ss = week.sessions.filter((s) => s.date === dt);
-        const unavailable = week.unavailableDays.includes(dt) || d.settings.unavailableWeekdays.includes(days.indexOf(dt));
+        const unavailable = week.unavailableDays.includes(dt) || d.settings.unavailableWeekdays.includes(idx);
         const outdoor = week.outdoorDays.includes(dt);
+        const isSource = movingSession?.date === dt;
         return (
-          <div key={dt} data-date={dt} className={`flex gap-2 rounded-xl p-2 transition ${over === dt ? 'bg-accent/15 ring-1 ring-accent' : dt === d.today ? 'bg-line/40' : ''}`}>
+          <div
+            key={dt}
+            onClick={movingSession ? () => dropOn(dt) : undefined}
+            className={`flex gap-2 rounded-xl p-2 transition ${
+              movingSession ? (isSource ? 'bg-line/40' : 'ring-1 ring-accent/60 cursor-pointer active:bg-accent/20') : dt === d.today ? 'bg-line/40' : ''
+            }`}
+          >
             <div className="w-12 shrink-0 text-xs pt-1">
               <div className={dt === d.today ? 'text-accent font-semibold' : 'text-muted'}>{fmtDay(dt)}</div>
               <div className="text-muted">{Number(dt.slice(8))}</div>
@@ -351,17 +323,28 @@ function WeekBoard({ week, plan, onPlan, onOpen }: { week: PlanWeek; plan: Plan;
               {ss.map((s) => (
                 <div
                   key={s.id}
-                  onPointerDown={onDown(s)}
-                  onPointerUp={onUp(s)}
-                  onContextMenu={(e) => e.preventDefault()}
-                  style={{ touchAction: drag ? 'none' : 'pan-y' }}
-                  className={`rounded-lg px-3 py-2 text-sm border ${drag?.id === s.id ? 'opacity-30' : ''} ${
+                  onClick={movingSession ? undefined : () => onOpen(s.id)}
+                  className={`rounded-lg px-3 py-2 text-sm border ${moving === s.id ? 'ring-2 ring-accent' : ''} ${
                     s.status === 'done' ? 'border-ok/50 bg-ok/10' : s.status === 'dropped' || s.status === 'missed' ? 'border-line opacity-50 line-through' : s.kind === 'prehab' || s.optional ? 'border-dashed border-line' : 'border-line bg-card'
-                  }`}
+                  } ${movingSession ? '' : 'cursor-pointer active:bg-line/40'}`}
                 >
-                  <div className="flex justify-between gap-2">
+                  <div className="flex justify-between items-center gap-2">
                     <span className="font-medium">{s.title}</span>
-                    <span className="text-xs text-muted">{s.estDurationMin}′</span>
+                    <span className="flex items-center gap-2 shrink-0">
+                      <span className="text-xs text-muted">{s.estDurationMin}′</span>
+                      {s.status === 'planned' && !movingSession && (
+                        <button
+                          aria-label={`Move ${s.title}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setMoving(s.id);
+                          }}
+                          className="min-h-[32px] px-2 rounded-lg bg-line/60 text-xs font-semibold active:bg-line"
+                        >
+                          ⇅ Move
+                        </button>
+                      )}
+                    </span>
                   </div>
                   {s.kind !== 'prehab' && (
                     <div className="text-xs text-muted">
@@ -374,12 +357,6 @@ function WeekBoard({ week, plan, onPlan, onOpen }: { week: PlanWeek; plan: Plan;
           </div>
         );
       })}
-      {drag && (
-        <div className="fixed z-50 pointer-events-none rounded-lg px-3 py-2 text-sm bg-accent text-black shadow-xl" style={{ left: drag.x - 60, top: drag.y - 20 }}>
-          {drag.title}
-        </div>
-      )}
-      {drag && <div className="fixed inset-0 z-40" style={{ touchAction: 'none' }} onPointerMove={onMove} onPointerUp={(e) => { const s = week.sessions.find((x) => x.id === drag.id); if (s) onUp(s)(e); }} />}
     </div>
   );
 }
@@ -465,7 +442,9 @@ export function PlanPage() {
       >
         <Card className="space-y-3">
           <div className="flex items-center justify-between text-sm">
-            <span className="text-muted">{fmtDate(week.startDate, { day: 'numeric', month: 'short' })} – {fmtDate(addDays(week.startDate, 6), { day: 'numeric', month: 'short' })}</span>
+            <span className="text-muted">
+              {fmtDate(week.startDate, { day: 'numeric', month: 'short' })} – {fmtDate(addDays(week.startDate, 6), { day: 'numeric', month: 'short' })}
+            </span>
             {week.validated ? <Badge cls="bg-ok/15 text-ok">Validated</Badge> : <Badge cls="bg-warn/15 text-warn">Not validated</Badge>}
           </div>
           {week.caps && (
@@ -473,7 +452,7 @@ export function PlanPage() {
               Finger load est. {fmtNum(week.caps.estFinger, 0)} / cap {fmtNum(week.caps.finger, 0)} FLU · restricted grips {fmtNum(week.caps.estRestricted, 0)} / {fmtNum(week.caps.restricted, 0)}
             </div>
           )}
-          <p className="text-xs text-muted">Long-press a session and drag it to another day. Tap to edit.</p>
+          <p className="text-xs text-muted">Tap ⇅ Move on a session, then tap the target day. Tap a session to edit it.</p>
           <WeekBoard week={week} plan={plan} onPlan={onPlan} onOpen={setEditing} />
           {violations.length > 0 && (
             <div className="text-sm text-warn space-y-1">
@@ -525,12 +504,21 @@ export function PlanPage() {
               yMax={2}
               marker={projSeries.findIndex((p) => p.date > d.today) - 1}
             />
-            <p className="text-xs text-muted mt-1">{proj.finger.calibrating ? 'Calibrating: projection indicative only.' : proj.warning ? 'Planned load would leave the green zone — consider moving or lightening a session.' : 'Planned load stays within limits.'}</p>
+            <p className="text-xs text-muted mt-1">
+              {proj.finger.calibrating ? 'Calibrating: projection indicative only.' : proj.warning ? 'Planned load would leave the green zone — consider moving or lightening a session.' : 'Planned load stays within limits.'}
+            </p>
           </Card>
         </Section>
       )}
 
-      <Button tone="ghost" className="w-full" onClick={() => confirmAction('Regenerate the plan from your latest profile and benchmarks? Your edits to future sessions will be replaced (history is kept).') && void run(() => svc.generatePlan('Regenerated by user'), 'Plan regenerated (draft)')}>
+      <Button
+        tone="ghost"
+        className="w-full"
+        onClick={() =>
+          confirmAction('Regenerate the plan from your latest profile and benchmarks? Your edits to future sessions will be replaced (history is kept).') &&
+          void run(() => svc.generatePlan('Regenerated by user'), 'Plan regenerated (draft)')
+        }
+      >
         Regenerate plan
       </Button>
 
@@ -542,10 +530,18 @@ export function PlanPage() {
             <div key={dt} className="flex items-center justify-between gap-2 min-h-[44px]">
               <span>{fmtDate(dt)}</span>
               <div className="flex gap-1">
-                <Button small tone={week.unavailableDays.includes(dt) ? 'danger' : 'subtle'} onClick={() => onPlan(toggleDayFlag(plan, dt, 'unavailable', !week.unavailableDays.includes(dt)), `${dt} marked ${week.unavailableDays.includes(dt) ? 'available' : 'unavailable'}`)}>
+                <Button
+                  small
+                  tone={week.unavailableDays.includes(dt) ? 'danger' : 'subtle'}
+                  onClick={() => onPlan(toggleDayFlag(plan, dt, 'unavailable', !week.unavailableDays.includes(dt)), `${dt} marked ${week.unavailableDays.includes(dt) ? 'available' : 'unavailable'}`)}
+                >
                   Busy
                 </Button>
-                <Button small tone={week.outdoorDays.includes(dt) ? 'primary' : 'subtle'} onClick={() => onPlan(toggleDayFlag(plan, dt, 'outdoor', !week.outdoorDays.includes(dt)), `${dt} ${week.outdoorDays.includes(dt) ? 'no longer' : ''} outdoor`)}>
+                <Button
+                  small
+                  tone={week.outdoorDays.includes(dt) ? 'primary' : 'subtle'}
+                  onClick={() => onPlan(toggleDayFlag(plan, dt, 'outdoor', !week.outdoorDays.includes(dt)), `${dt} ${week.outdoorDays.includes(dt) ? 'no longer' : ''} outdoor`)}
+                >
                   Outdoor
                 </Button>
               </div>
