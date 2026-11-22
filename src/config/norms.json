@@ -1,0 +1,20 @@
+{
+  "_doc": "INDICATIVE grade-based norms for a sport-redpoint level. Evidence: coaching_practice — rough heuristics compiled from public coaching material, NOT validated norms. Individual variation is large (body mass, style, technique). Used only as one input (50 %) to the weakness ranking, together with the questionnaire and log trends.",
+  "evidence": "coaching_practice",
+  "caveat": "Norms are indicative only. Many climbers redpoint well above or below these numbers. Use them to spot relative gaps, not as targets to chase.",
+  "bySportGrade": {
+    "7a":  { "maxHangTotalPctBW": 125, "pullup1RMAddedPctBW": 30, "lockoffS": 15, "frontLeverLevel": 1, "repeatersRemovedPctBW": 25 },
+    "7a+": { "maxHangTotalPctBW": 130, "pullup1RMAddedPctBW": 35, "lockoffS": 17, "frontLeverLevel": 1, "repeatersRemovedPctBW": 22 },
+    "7b":  { "maxHangTotalPctBW": 135, "pullup1RMAddedPctBW": 40, "lockoffS": 20, "frontLeverLevel": 2, "repeatersRemovedPctBW": 18 },
+    "7b+": { "maxHangTotalPctBW": 140, "pullup1RMAddedPctBW": 45, "lockoffS": 22, "frontLeverLevel": 2, "repeatersRemovedPctBW": 15 },
+    "7c":  { "maxHangTotalPctBW": 145, "pullup1RMAddedPctBW": 50, "lockoffS": 25, "frontLeverLevel": 3, "repeatersRemovedPctBW": 12 },
+    "7c+": { "maxHangTotalPctBW": 150, "pullup1RMAddedPctBW": 55, "lockoffS": 27, "frontLeverLevel": 3, "repeatersRemovedPctBW": 9 },
+    "8a":  { "maxHangTotalPctBW": 157, "pullup1RMAddedPctBW": 60, "lockoffS": 30, "frontLeverLevel": 4, "repeatersRemovedPctBW": 5 }
+  },
+  "transfer": {
+    "_doc": "Expected gap (sub-grades) between board grade and outdoor boulder grade. A larger gap suggests a technique / style-transfer weakness to confirm.",
+    "expectedBoardMinusOutdoor": 1,
+    "weakAtGap": 3
+  },
+  "criticalForce": { "_doc": "Giles et al. 2019: mean CF ~41 % of MVC in their climber sample.", "referencePctOfPeak": 41 }
+}

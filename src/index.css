@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 246 247 249;
+  --card: 255 255 255;
+  --line: 226 229 235;
+  --fg: 17 20 26;
+  --muted: 100 108 122;
+  --accent: 8 145 178;
+}
+.dark {
+  --bg: 11 13 16;
+  --card: 21 24 30;
+  --line: 38 43 52;
+  --fg: 236 239 244;
+  --muted: 140 148 162;
+  --accent: 34 211 238;
+}
+html, body, #root { height: 100%; }
+body {
+  @apply bg-bg text-fg antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+input, select, textarea { @apply bg-bg border border-line rounded-lg px-3 py-2 text-fg w-full; font-size: 16px; }
+input:focus, select:focus, textarea:focus { @apply outline-none ring-2 ring-accent/60; }
+input[type='range'] { @apply p-0 border-0 bg-transparent accent-accent; }
+input[type='checkbox'] { @apply w-5 h-5 p-0 accent-accent; }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+.fade-in { animation: fade-in 180ms ease-out; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.sheet-in { animation: sheet-in 200ms ease-out; }
+@keyframes sheet-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.tabular { font-variant-numeric: tabular-nums; }

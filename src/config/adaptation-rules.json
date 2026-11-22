@@ -1,0 +1,87 @@
+{
+  "_doc": "Adaptation, readiness, progression and recovery rules. All values are editable. Evidence labels are shown in the UI.",
+  "readiness": {
+    "evidence": "coaching_practice",
+    "_doc": "Wellness questionnaire approach (cf. Hooper/McLean-style scales). Score 0-100 from 1-5 items plus sleep vs personal baseline.",
+    "weights": { "fatigue": 0.2, "soreness": 0.15, "stress": 0.1, "motivation": 0.1, "sleepQuality": 0.15, "sleepDuration": 0.15, "fingerStatus": 0.15 },
+    "thresholds": { "normal": { "proceed": 65, "lighter": 45 }, "newborn": { "proceed": 55, "lighter": 35 } },
+    "newbornSleepWeightFactor": 0.5,
+    "sleepShortfallH": 0.75,
+    "fingerStatusDowngradeAt": 2,
+    "defaultSleepBaselineH": 7.5,
+    "baselineWindowDays": 28,
+    "baselineMinRecords": 7
+  },
+  "deload": {
+    "evidence": "coaching_practice",
+    "minTriggers": 2,
+    "lowReadinessConsecutiveDays": 3,
+    "sleepBelowBaselineNights": 3,
+    "painTrendWindowDays": 7,
+    "painTrendMinIncrease": 1,
+    "failedProgressionWindowDays": 21,
+    "failedProgressionCount": 2,
+    "volumeFactor": 0.5,
+    "intensityFactor": 0.85
+  },
+  "progression": {
+    "evidence": "coaching_practice",
+    "fingerStepPctBW": 2.5,
+    "pullStepKg": 2.5,
+    "forceStepKg": 1,
+    "roundToKg": 0.5,
+    "rpeProgressMax": 8,
+    "rpeHoldMax": 9,
+    "failReducePct": 5,
+    "maxFingerIncreasePctBWPerWeek": 2.5,
+    "strengthBlockRamp": [0.88, 0.91, 0.94, 0.97, 0.97, 0.97],
+    "maintenanceIntensity": 0.9,
+    "openHandFactor": 0.9,
+    "oneArmFactor": 0.9,
+    "pocket3fFactor": 0.6,
+    "pocket2fFactor": 0.45,
+    "tendonIsoPctOfMax": 0.35,
+    "noHangPctOfMax": 0.85,
+    "repeatersExtraAssistPctBW": 5,
+    "repeatersDefaultPctOfMax": 0.65,
+    "pullupWorkPctOf1RM": 0.87,
+    "fingerCurlsDefaultKg": 10
+  },
+  "recovery": {
+    "evidence": "coaching_practice",
+    "minDaysBetweenMaxFinger": 2,
+    "noBackToBackHighFinger": true,
+    "maxSessionsPerDay": 1,
+    "rescheduleWithinWeekOnly": true,
+    "prehabSlotsPerWeek": 2,
+    "prehabDurationMin": 12
+  },
+  "pain": {
+    "evidence": "research",
+    "references": ["silbernagel2007"],
+    "_doc": "Pain-monitoring model adapted from Silbernagel et al. 2007 (Achilles tendinopathy). Application to fingers is an extrapolation.",
+    "continueMax": 2,
+    "modifyMax": 5,
+    "recheckHours": 48,
+    "noImprovementDays": 14
+  },
+  "modes": {
+    "low_capacity": { "sessionsPerWeek": 2, "durationMin": 60 },
+    "newborn": { "sessionsPerWeek": 2, "durationMin": 35, "optionalClimbingBonus": 1 },
+    "return_ramp": { "weeks": 3, "volume": [0.6, 0.75, 0.9] }
+  },
+  "macro": {
+    "cycle": [
+      { "kind": "strength", "weeks": 5 },
+      { "kind": "power", "weeks": 4 },
+      { "kind": "performance", "weeks": 5 }
+    ],
+    "defaultHorizonWeeks": 26,
+    "taperWeeks": 1,
+    "minBlockWeeks": 3,
+    "maxBlockWeeks": 6,
+    "newbornBlockWeeks": 4,
+    "maintenanceBlockWeeks": 4
+  },
+  "weeklyReview": { "adherenceLowPct": 60 }
+}

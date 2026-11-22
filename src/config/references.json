@@ -1,0 +1,75 @@
+{
+  "_doc": "Bibliography. Only add entries you can verify. Exercises/rules without a reference are labelled 'coaching practice' in the UI.",
+  "foster2001": {
+    "citation": "Foster C, Florhaug JA, Franklin J, et al. A new approach to monitoring exercise training. J Strength Cond Res. 2001;15(1):109-115.",
+    "topic": "Session RPE x duration as internal training load."
+  },
+  "williams2017": {
+    "citation": "Williams S, West S, Cross MJ, Stokes KA. Better way to determine the acute:chronic workload ratio? Br J Sports Med. 2017;51(3):209-210.",
+    "topic": "EWMA-based ACWR, decay constant 2/(N+1)."
+  },
+  "murray2017": {
+    "citation": "Murray NB, Gabbett TJ, Townshend AD, Blanch P. Calculating acute:chronic workload ratios using exponentially weighted moving averages provides a more sensitive indicator of injury likelihood than rolling averages. Br J Sports Med. 2017;51(9):749-754.",
+    "topic": "EWMA vs rolling averages for ACWR."
+  },
+  "gabbett2016": {
+    "citation": "Gabbett TJ. The training-injury prevention paradox: should athletes be training smarter and harder? Br J Sports Med. 2016;50(5):273-280.",
+    "topic": "Workload spikes and injury risk; origin of the 0.8-1.3 'sweet spot'."
+  },
+  "impellizzeri2020": {
+    "citation": "Impellizzeri FM, Tenan MS, Kempton T, Novak A, Coutts AJ. Acute:chronic workload ratio: conceptual issues and fundamental pitfalls. Int J Sports Physiol Perform. 2020;15(6):907-913.",
+    "topic": "Critique of ACWR; why it is used only as a warning signal here."
+  },
+  "lopez2012": {
+    "citation": "López-Rivera E, González-Badillo JJ. The effects of two maximum grip strength training methods using the same effort duration and different edge depth on grip endurance in elite climbers. Sports Technology. 2012;5(3-4):100-110.",
+    "topic": "Max hangs with added weight vs minimum-edge hangs."
+  },
+  "lopez2019": {
+    "citation": "López-Rivera E, González-Badillo JJ. Comparison of the effects of three hangboard strength and endurance training programs on grip endurance in sport climbers. J Hum Kinet. 2019;66:183-195. doi:10.2478/hukin-2018-0057",
+    "topic": "Max hangs vs intermittent hangs (repeaters) for grip endurance."
+  },
+  "medernach2015": {
+    "citation": "Medernach JPJ, Kleinöder H, Lötzerich HHH. Fingerboard in competitive bouldering: training effects on grip strength and endurance. J Strength Cond Res. 2015;29(8):2286-2295. doi:10.1519/JSC.0000000000000873",
+    "topic": "4 weeks of fingerboarding improves grip strength/endurance in advanced boulderers."
+  },
+  "levernier2019": {
+    "citation": "Levernier G, Laffaye G. Four weeks of finger grip training increases the rate of force development and the maximal force in elite and top world-ranking climbers. J Strength Cond Res. 2019;33(9):2471-2480. doi:10.1519/JSC.0000000000002230",
+    "topic": "Short hangboard blocks improve max force and RFD."
+  },
+  "giles2019": {
+    "citation": "Giles D, Chidley JB, Taylor N, Torr O, Hadley J, Randall T, Fryer S. The determination of finger-flexor critical force in rock climbers. Int J Sports Physiol Perform. 2019;14(7):972-979. doi:10.1123/ijspp.2018-0809",
+    "topic": "Critical force test (7:3 intermittent all-out)."
+  },
+  "baar2017": {
+    "citation": "Baar K. Minimizing injury and maximizing return to play: lessons from engineered ligaments. Sports Med. 2017;47(Suppl 1):5-11. doi:10.1007/s40279-017-0719-x",
+    "topic": "Short (<10 min) loading bouts separated by ~6 h for connective tissue; derived from engineered ligaments (in vitro)."
+  },
+  "silbernagel2007": {
+    "citation": "Silbernagel KG, Thomeé R, Eriksson BI, Karlsson J. Continued sports activity, using a pain-monitoring model, during rehabilitation in patients with Achilles tendinopathy. Am J Sports Med. 2007;35(6):897-906. doi:10.1177/0363546506298279",
+    "topic": "Pain-monitoring model (originally Achilles tendinopathy) used for the traffic-light rules."
+  },
+  "schoffl2003": {
+    "citation": "Schöffl V, Hochholzer T, Winkelmann HP, Strecker W. Pulley injuries in rock climbers. Wilderness Environ Med. 2003;14(2):94-100.",
+    "topic": "Pulley injury grading and conservative treatment pathways."
+  },
+  "schoffl2007tape": {
+    "citation": "Schöffl I, Einwag F, Strecker W, Hennig F, Schöffl V. Impact of taping after finger flexor tendon pulley ruptures in rock climbers. J Appl Biomech. 2007;23(1):52-62.",
+    "topic": "H-taping after pulley rupture."
+  },
+  "miro2021": {
+    "citation": "Miro PH, vanSonnenberg E, Sabb DM, Schöffl V. Finger flexor pulley injuries in rock climbers. Wilderness Environ Med. 2021;32(2):247-258. doi:10.1016/j.wem.2021.01.011",
+    "topic": "Review: crimp grip as injury mechanism, warm-up, grading, conservative care."
+  },
+  "schweizer2001": {
+    "citation": "Schweizer A. Biomechanical properties of the crimp grip position in rock climbers. J Biomech. 2001;34(2):217-223.",
+    "topic": "Pulley forces are much higher in crimp than in open-hand positions."
+  },
+  "horst2016": {
+    "citation": "Hörst EJ. Training for Climbing. 3rd ed. Guilford, CT: FalconGuides; 2016.",
+    "topic": "Coaching text (book, not peer-reviewed)."
+  },
+  "anderson2014": {
+    "citation": "Anderson M, Anderson M. The Rock Climber's Training Manual. Boulder, CO: Fixed Pin Publishing; 2014.",
+    "topic": "Coaching text (book, not peer-reviewed): periodisation, limit bouldering, 4x4, ARC."
+  }
+}

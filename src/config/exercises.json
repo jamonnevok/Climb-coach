@@ -1,0 +1,1144 @@
+[
+ {
+  "id": "general_warmup",
+  "name": "General warm-up (pulse raiser + mobility)",
+  "category": "warmup",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 420
+  },
+  "loadMode": "none",
+  "fingerIntensity": "none",
+  "rationale": "Raises tissue temperature and prepares shoulders/wrists before loading.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [],
+  "cues": [
+   "Easy pulse raiser 3 min",
+   "Shoulder circles, band pull-aparts",
+   "Wrist and finger mobility"
+  ]
+ },
+ {
+  "id": "finger_warmup_ramp",
+  "name": "Finger warm-up ramp (hangboard)",
+  "category": "warmup",
+  "timer": {
+   "kind": "hang",
+   "sets": 1,
+   "reps": 6,
+   "workS": 7,
+   "restS": 30,
+   "setRestS": 60
+  },
+  "loadMode": "percent_bw",
+  "fingerIntensity": "low",
+  "rationale": "Progressive finger loading before hard grips. A proper warm-up is thought to reduce pulley injury risk (review).",
+  "references": [
+   "miro2021"
+  ],
+  "evidence": "research",
+  "equipment": [
+   "hangboard"
+  ],
+  "defaultGrip": "half_crimp",
+  "gripOptions": [
+   "half_crimp",
+   "open_hand"
+  ],
+  "edgeMm": 20,
+  "cues": [
+   "Feet on a chair: hang 1-2 at ~40 % BW, 3-4 at ~60 %, 5-6 at ~80 %",
+   "Half crimp and open hand alternated",
+   "Stop if any pulley discomfort"
+  ]
+ },
+ {
+  "id": "climb_warmup_easy",
+  "name": "Easy climbing warm-up",
+  "category": "warmup",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 600
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "low",
+  "rationale": "Volume on big holds and progressively smaller ones before limit efforts.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed",
+  "cues": [
+   "Start 3-4 grades below max",
+   "Finish with 2-3 moderate problems on crimps"
+  ]
+ },
+ {
+  "id": "cooldown_easy",
+  "name": "Cool-down: easy climbing + forearm flush",
+  "category": "cooldown",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 420
+  },
+  "loadMode": "none",
+  "fingerIntensity": "low",
+  "rationale": "Low-intensity movement and light stretching to finish the session calmly.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [],
+  "cues": [
+   "Easy traverse or jugs 3-4 min",
+   "Gentle forearm and finger extensor stretches"
+  ]
+ },
+ {
+  "id": "max_hang_20_hc",
+  "name": "Max hangs 20 mm — half crimp",
+  "category": "finger",
+  "timer": {
+   "kind": "hang",
+   "sets": 5,
+   "reps": 1,
+   "workS": 10,
+   "restS": 0,
+   "setRestS": 180
+  },
+  "loadMode": "added_kg",
+  "fingerIntensity": "max",
+  "rationale": "Short maximal hangs with added weight and complete rest develop finger strength with low volume (López-Rivera method).",
+  "references": [
+   "lopez2012",
+   "lopez2019",
+   "medernach2015",
+   "levernier2019"
+  ],
+  "evidence": "research",
+  "equipment": [
+   "hangboard",
+   "weights"
+  ],
+  "defaultGrip": "half_crimp",
+  "gripOptions": [
+   "half_crimp",
+   "open_hand"
+  ],
+  "edgeMm": 20,
+  "cues": [
+   "Index-middle-ring-little on edge, thumb off",
+   "Shoulders engaged, slight elbow bend",
+   "Stop the set if the grip changes"
+  ]
+ },
+ {
+  "id": "max_hang_20_open",
+  "name": "Max hangs 20 mm — open hand (3-finger drag)",
+  "category": "finger",
+  "timer": {
+   "kind": "hang",
+   "sets": 3,
+   "reps": 1,
+   "workS": 10,
+   "restS": 0,
+   "setRestS": 180
+  },
+  "loadMode": "added_kg",
+  "fingerIntensity": "max",
+  "rationale": "Open-hand positions load the A2 pulley much less than crimping, while still training finger flexors.",
+  "references": [
+   "schweizer2001",
+   "lopez2012"
+  ],
+  "evidence": "research",
+  "equipment": [
+   "hangboard",
+   "weights"
+  ],
+  "defaultGrip": "open_hand",
+  "gripOptions": [
+   "open_hand"
+  ],
+  "edgeMm": 20
+ },
+ {
+  "id": "min_edge_hang",
+  "name": "Minimum-edge hangs (body weight)",
+  "category": "finger",
+  "timer": {
+   "kind": "hang",
+   "sets": 4,
+   "reps": 1,
+   "workS": 10,
+   "restS": 0,
+   "setRestS": 180
+  },
+  "loadMode": "bodyweight",
+  "fingerIntensity": "max",
+  "rationale": "Alternative max-strength method: progress by reducing edge depth instead of adding weight.",
+  "references": [
+   "lopez2012"
+  ],
+  "evidence": "research",
+  "equipment": [
+   "hangboard"
+  ],
+  "defaultGrip": "half_crimp",
+  "gripOptions": [
+   "half_crimp",
+   "open_hand"
+  ],
+  "edgeMm": 14
+ },
+ {
+  "id": "one_arm_hang_assisted",
+  "name": "One-arm hangs (assisted with pulley/Tindeq)",
+  "category": "finger",
+  "timer": {
+   "kind": "hang",
+   "sets": 3,
+   "reps": 2,
+   "workS": 7,
+   "restS": 60,
+   "setRestS": 180
+  },
+  "loadMode": "removed_kg",
+  "fingerIntensity": "max",
+  "rationale": "Unilateral max-strength stimulus; assistance keeps load submaximal. Advanced — introduce only with no finger symptoms.",
+  "references": [
+   "horst2016"
+  ],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "hangboard",
+   "pulley"
+  ],
+  "defaultGrip": "half_crimp",
+  "gripOptions": [
+   "half_crimp",
+   "open_hand"
+  ],
+  "edgeMm": 20
+ },
+ {
+  "id": "nohang_lift",
+  "name": "No-hang lifts (loading pin / no-hang device)",
+  "category": "finger",
+  "timer": {
+   "kind": "hang",
+   "sets": 4,
+   "reps": 1,
+   "workS": 10,
+   "restS": 0,
+   "setRestS": 120
+  },
+  "loadMode": "target_force_kg",
+  "fingerIntensity": "high",
+  "rationale": "One hand at a time from the floor; precise load control and easy home access. Tindeq target band when connected.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "no_hang_device",
+   "loading_pin",
+   "weights"
+  ],
+  "defaultGrip": "half_crimp",
+  "gripOptions": [
+   "half_crimp",
+   "open_hand",
+   "pocket_3f",
+   "pocket_2f_middle"
+  ],
+  "edgeMm": 20,
+  "cues": [
+   "Lift slowly, no jerk",
+   "Neutral wrist",
+   "Each hand in turn"
+  ]
+ },
+ {
+  "id": "pocket_hang_3f",
+  "name": "3-finger pocket hangs (progressive)",
+  "category": "finger",
+  "timer": {
+   "kind": "hang",
+   "sets": 3,
+   "reps": 1,
+   "workS": 10,
+   "restS": 0,
+   "setRestS": 150
+  },
+  "loadMode": "removed_kg",
+  "fingerIntensity": "high",
+  "rationale": "Specific to limestone pockets. Introduced assisted and progressed slowly; counted in the restricted-grip budget.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "hangboard",
+   "pulley"
+  ],
+  "defaultGrip": "pocket_3f",
+  "gripOptions": [
+   "pocket_3f"
+  ],
+  "edgeMm": 20
+ },
+ {
+  "id": "pocket_hang_2f",
+  "name": "2-finger pocket hangs (front/middle pair, assisted)",
+  "category": "finger",
+  "timer": {
+   "kind": "hang",
+   "sets": 2,
+   "reps": 1,
+   "workS": 7,
+   "restS": 0,
+   "setRestS": 150
+  },
+  "loadMode": "removed_kg",
+  "fingerIntensity": "high",
+  "rationale": "Two-finger pockets concentrate load on fewer pulleys; heavily assisted, low volume, restricted budget.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "hangboard",
+   "pulley"
+  ],
+  "defaultGrip": "pocket_2f_middle",
+  "gripOptions": [
+   "pocket_2f_middle",
+   "pocket_2f_front"
+  ],
+  "edgeMm": 20
+ },
+ {
+  "id": "repeaters_7_3",
+  "name": "Repeaters 7:3 on 20 mm",
+  "category": "finger",
+  "timer": {
+   "kind": "repeaters",
+   "sets": 3,
+   "reps": 6,
+   "workS": 7,
+   "restS": 3,
+   "setRestS": 180
+  },
+  "loadMode": "removed_kg",
+  "fingerIntensity": "high",
+  "rationale": "Intermittent submaximal hangs improve grip endurance (López-Rivera & González-Badillo 2019).",
+  "references": [
+   "lopez2019"
+  ],
+  "evidence": "research",
+  "equipment": [
+   "hangboard",
+   "pulley"
+  ],
+  "defaultGrip": "half_crimp",
+  "gripOptions": [
+   "half_crimp",
+   "open_hand"
+  ],
+  "edgeMm": 20
+ },
+ {
+  "id": "tendon_iso_low",
+  "name": "Low-intensity long isometrics (tendon conditioning)",
+  "category": "prehab",
+  "timer": {
+   "kind": "isometric",
+   "sets": 1,
+   "reps": 6,
+   "workS": 30,
+   "restS": 30,
+   "setRestS": 0
+  },
+  "loadMode": "target_force_kg",
+  "fingerIntensity": "low",
+  "rationale": "Short (<10 min) low-intensity loading bouts. Based on engineered-ligament data (in vitro) — extrapolation to finger pulleys is EXPERIMENTAL.",
+  "references": [
+   "baar2017"
+  ],
+  "evidence": "experimental",
+  "equipment": [
+   "no_hang_device",
+   "loading_pin",
+   "tindeq"
+  ],
+  "defaultGrip": "half_crimp",
+  "gripOptions": [
+   "half_crimp",
+   "open_hand"
+  ],
+  "edgeMm": 20,
+  "cues": [
+   "~30-40 % of your peak force per hand",
+   "Pain-free, no fatigue",
+   "Can be repeated 6 h later"
+  ]
+ },
+ {
+  "id": "finger_curls",
+  "name": "Finger curls (dumbbell / loading pin)",
+  "category": "prehab",
+  "timer": {
+   "kind": "reps",
+   "sets": 2,
+   "reps": 15,
+   "workS": 3,
+   "restS": 0,
+   "setRestS": 60
+  },
+  "loadMode": "added_kg",
+  "fingerIntensity": "low",
+  "rationale": "Full-range finger flexion with light load; general tissue capacity work.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "weights"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "extensor_band",
+  "name": "Finger extensor band openings",
+  "category": "prehab",
+  "timer": {
+   "kind": "reps",
+   "sets": 2,
+   "reps": 25,
+   "workS": 1,
+   "restS": 0,
+   "setRestS": 45
+  },
+  "loadMode": "none",
+  "fingerIntensity": "none",
+  "rationale": "Balances flexor-dominant training; low risk.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "band"
+  ]
+ },
+ {
+  "id": "tendon_glides",
+  "name": "Tendon gliding sequence",
+  "category": "prehab",
+  "timer": {
+   "kind": "reps",
+   "sets": 1,
+   "reps": 10,
+   "workS": 5,
+   "restS": 0,
+   "setRestS": 0
+  },
+  "loadMode": "none",
+  "fingerIntensity": "none",
+  "rationale": "Hand-therapy mobility sequence (straight, hook, full fist, tabletop, straight fist).",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": []
+ },
+ {
+  "id": "weighted_pullup",
+  "name": "Weighted pull-ups",
+  "category": "pull",
+  "timer": {
+   "kind": "reps",
+   "sets": 4,
+   "reps": 3,
+   "workS": 4,
+   "restS": 0,
+   "setRestS": 180
+  },
+  "loadMode": "added_kg",
+  "fingerIntensity": "none",
+  "rationale": "Max pulling strength supports steep climbing and lock-offs.",
+  "references": [
+   "horst2016"
+  ],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "pullup_bar",
+   "weights"
+  ],
+  "defaultGrip": "jug"
+ },
+ {
+  "id": "lockoff_holds",
+  "name": "Lock-off holds (90° and 120°)",
+  "category": "pull",
+  "timer": {
+   "kind": "hang",
+   "sets": 3,
+   "reps": 2,
+   "workS": 5,
+   "restS": 30,
+   "setRestS": 120
+  },
+  "loadMode": "added_kg",
+  "fingerIntensity": "none",
+  "rationale": "Static pulling strength for reaching from locked positions.",
+  "references": [
+   "horst2016"
+  ],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "pullup_bar"
+  ],
+  "defaultGrip": "jug"
+ },
+ {
+  "id": "front_lever_prog",
+  "name": "Front lever progression holds",
+  "category": "core",
+  "timer": {
+   "kind": "hang",
+   "sets": 4,
+   "reps": 1,
+   "workS": 8,
+   "restS": 0,
+   "setRestS": 120
+  },
+  "loadMode": "bodyweight",
+  "fingerIntensity": "none",
+  "rationale": "Body tension for steep terrain and keeping feet on.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "pullup_bar"
+  ],
+  "defaultGrip": "jug"
+ },
+ {
+  "id": "antagonist_push",
+  "name": "Push-ups / dips",
+  "category": "antagonist",
+  "timer": {
+   "kind": "reps",
+   "sets": 2,
+   "reps": 12,
+   "workS": 2,
+   "restS": 0,
+   "setRestS": 90
+  },
+  "loadMode": "bodyweight",
+  "fingerIntensity": "none",
+  "rationale": "Shoulder balance; low dose.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": []
+ },
+ {
+  "id": "limit_bouldering",
+  "name": "Limit bouldering (board / spray wall)",
+  "category": "power",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 2400
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "max",
+  "rationale": "Max-intensity problems near your limit with full rest train recruitment and contact strength.",
+  "references": [
+   "anderson2014"
+  ],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "kilter",
+   "spray_wall"
+  ],
+  "defaultGrip": "mixed",
+  "cues": [
+   "3-5 problems at/near max",
+   "3-4 min rest between attempts",
+   "Stop when quality drops"
+  ]
+ },
+ {
+  "id": "board_power_moves",
+  "name": "Board power moves (Kilter max moves)",
+  "category": "power",
+  "timer": {
+   "kind": "reps",
+   "sets": 5,
+   "reps": 3,
+   "workS": 5,
+   "restS": 0,
+   "setRestS": 180
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "high",
+  "rationale": "Single explosive moves between good-to-medium holds; power with controlled finger load.",
+  "references": [
+   "anderson2014"
+  ],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "kilter"
+  ],
+  "defaultGrip": "open_hand"
+ },
+ {
+  "id": "campus_ladders",
+  "name": "Campus ladders (open hand, large rungs)",
+  "category": "power",
+  "timer": {
+   "kind": "reps",
+   "sets": 4,
+   "reps": 1,
+   "workS": 8,
+   "restS": 0,
+   "setRestS": 180
+  },
+  "loadMode": "none",
+  "fingerIntensity": "max",
+  "rationale": "Rate of force development. Open hand on large rungs only, because of A2 history. Skip if any finger symptoms.",
+  "references": [
+   "anderson2014"
+  ],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "campus_board"
+  ],
+  "defaultGrip": "open_hand"
+ },
+ {
+  "id": "board_emom",
+  "name": "Board EMOM (1 problem per minute)",
+  "category": "power",
+  "timer": {
+   "kind": "emom",
+   "sets": 1,
+   "reps": 8,
+   "workS": 40,
+   "restS": 20,
+   "setRestS": 0,
+   "totalS": 480
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "high",
+  "rationale": "Repeated power efforts with incomplete rest.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "kilter"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "four_by_four",
+  "name": "4x4 bouldering",
+  "category": "endurance",
+  "timer": {
+   "kind": "four_by_four",
+   "sets": 4,
+   "reps": 4,
+   "workS": 45,
+   "restS": 0,
+   "setRestS": 240
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "high",
+  "rationale": "Power-endurance staple: four problems back-to-back, four times.",
+  "references": [
+   "anderson2014",
+   "horst2016"
+  ],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "board_intervals",
+  "name": "Board intervals 1:1",
+  "category": "endurance",
+  "timer": {
+   "kind": "interval",
+   "sets": 1,
+   "reps": 6,
+   "workS": 60,
+   "restS": 60,
+   "setRestS": 0
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "moderate",
+  "rationale": "Route-like intermittent pump with controlled rest.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "kilter",
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "arc",
+  "name": "ARC continuous climbing",
+  "category": "endurance",
+  "timer": {
+   "kind": "arc",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 1200
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "low",
+  "rationale": "Long low-intensity climbing (light pump) for aerobic capacity and movement volume.",
+  "references": [
+   "anderson2014"
+  ],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "tech_silent_feet",
+  "name": "Silent feet",
+  "category": "technique",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 600
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "moderate",
+  "rationale": "Precise foot placement; foot errors are a common technique limiter.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "tech_hover_hands",
+  "name": "Hover hands / pause before grabbing",
+  "category": "technique",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 600
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "moderate",
+  "rationale": "Better body position and static control.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "tech_flag_drop_knee",
+  "name": "Flagging & drop-knee drills",
+  "category": "technique",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 600
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "moderate",
+  "rationale": "Hip positioning on vertical-to-steep terrain.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "tech_limestone_transfer",
+  "name": "Limestone transfer drill (spray wall: small crimps, pockets, smears)",
+  "category": "technique",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 900
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "moderate",
+  "rationale": "Set problems that mimic outdoor rock: poor feet, small edges, mono-free pockets; closes the board-to-rock gap.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "spray_wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "tech_kilter_vertical",
+  "name": "Kilter at low angle (20-30°) — precision",
+  "category": "technique",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 900
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "moderate",
+  "rationale": "Lower angles reward footwork and body position more than raw power.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "kilter"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "tech_downclimb",
+  "name": "Down-climbing",
+  "category": "technique",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 600
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "low",
+  "rationale": "Builds movement awareness and footwork.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "tech_onsight_sim",
+  "name": "Onsight simulation (read then climb)",
+  "category": "technique",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 900
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "moderate",
+  "rationale": "Uses your reading strength; practise efficient execution on new problems.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "free_climb",
+  "name": "Free climbing (unstructured, fun)",
+  "category": "climbing",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 5400
+  },
+  "loadMode": "none",
+  "fingerIntensity": "moderate",
+  "rationale": "Enjoyment and movement variety. Logged for load.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "wall"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "projecting_route",
+  "name": "Projecting (sport route)",
+  "category": "climbing",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 7200
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "high",
+  "rationale": "Redpoint practice: work sections, link, then send burns with full rest.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "rope"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "outdoor_day",
+  "name": "Outdoor day",
+  "category": "climbing",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 14400
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "high",
+  "rationale": "Outdoor climbing; log routes/boulders for load.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "rope"
+  ],
+  "defaultGrip": "mixed"
+ },
+ {
+  "id": "test_max_hang",
+  "name": "TEST: max hang 20 mm / 10 s / half crimp",
+  "category": "test",
+  "timer": {
+   "kind": "hang",
+   "sets": 4,
+   "reps": 1,
+   "workS": 10,
+   "restS": 0,
+   "setRestS": 240
+  },
+  "loadMode": "added_kg",
+  "fingerIntensity": "max",
+  "rationale": "Benchmark for finger strength. Work up in steps; record the heaviest clean 10 s hang.",
+  "references": [
+   "lopez2012"
+  ],
+  "evidence": "research",
+  "equipment": [
+   "hangboard",
+   "weights"
+  ],
+  "defaultGrip": "half_crimp",
+  "edgeMm": 20
+ },
+ {
+  "id": "test_weighted_pullup",
+  "name": "TEST: weighted pull-up (1RM or 3RM)",
+  "category": "test",
+  "timer": {
+   "kind": "reps",
+   "sets": 4,
+   "reps": 1,
+   "workS": 4,
+   "restS": 0,
+   "setRestS": 240
+  },
+  "loadMode": "added_kg",
+  "fingerIntensity": "none",
+  "rationale": "Benchmark for pulling strength. 3RM converted with the Epley formula.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "pullup_bar",
+   "weights"
+  ],
+  "defaultGrip": "jug"
+ },
+ {
+  "id": "test_repeaters",
+  "name": "TEST: repeaters 7:3 to failure (assisted)",
+  "category": "test",
+  "timer": {
+   "kind": "repeaters",
+   "sets": 1,
+   "reps": 40,
+   "workS": 7,
+   "restS": 3,
+   "setRestS": 0
+  },
+  "loadMode": "removed_kg",
+  "fingerIntensity": "high",
+  "rationale": "Benchmark for finger endurance: reps to failure at a fixed assistance.",
+  "references": [
+   "lopez2019"
+  ],
+  "evidence": "research",
+  "equipment": [
+   "hangboard",
+   "pulley"
+  ],
+  "defaultGrip": "half_crimp",
+  "edgeMm": 20
+ },
+ {
+  "id": "test_lockoff",
+  "name": "TEST: max lock-off at 90°",
+  "category": "test",
+  "timer": {
+   "kind": "hang",
+   "sets": 1,
+   "reps": 1,
+   "workS": 60,
+   "restS": 0,
+   "setRestS": 0
+  },
+  "loadMode": "bodyweight",
+  "fingerIntensity": "none",
+  "rationale": "Seconds held at 90° elbow angle.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "pullup_bar"
+  ],
+  "defaultGrip": "jug"
+ },
+ {
+  "id": "test_front_lever",
+  "name": "TEST: front lever level",
+  "category": "test",
+  "timer": {
+   "kind": "hang",
+   "sets": 3,
+   "reps": 1,
+   "workS": 5,
+   "restS": 0,
+   "setRestS": 120
+  },
+  "loadMode": "bodyweight",
+  "fingerIntensity": "none",
+  "rationale": "Highest progression held for 5 s.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "pullup_bar"
+  ],
+  "defaultGrip": "jug"
+ },
+ {
+  "id": "test_peak_force",
+  "name": "TEST: Tindeq peak force per hand",
+  "category": "test",
+  "timer": {
+   "kind": "hang",
+   "sets": 3,
+   "reps": 2,
+   "workS": 5,
+   "restS": 120,
+   "setRestS": 120
+  },
+  "loadMode": "target_force_kg",
+  "fingerIntensity": "max",
+  "rationale": "Peak pull per hand on 20 mm; also used for asymmetry watch.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "tindeq",
+   "no_hang_device"
+  ],
+  "defaultGrip": "half_crimp",
+  "edgeMm": 20
+ },
+ {
+  "id": "test_critical_force",
+  "name": "TEST: critical force (7:3 all-out, per hand)",
+  "category": "test",
+  "timer": {
+   "kind": "repeaters",
+   "sets": 1,
+   "reps": 24,
+   "workS": 7,
+   "restS": 3,
+   "setRestS": 0
+  },
+  "loadMode": "target_force_kg",
+  "fingerIntensity": "max",
+  "rationale": "Single-session all-out intermittent test (Giles et al. 2019). Optional.",
+  "references": [
+   "giles2019"
+  ],
+  "evidence": "research",
+  "equipment": [
+   "tindeq"
+  ],
+  "defaultGrip": "half_crimp",
+  "edgeMm": 20
+ },
+ {
+  "id": "test_board_max",
+  "name": "TEST: board max move / max problem",
+  "category": "test",
+  "timer": {
+   "kind": "countdown",
+   "sets": 1,
+   "reps": 1,
+   "workS": 0,
+   "restS": 0,
+   "setRestS": 0,
+   "totalS": 1800
+  },
+  "loadMode": "grade",
+  "fingerIntensity": "max",
+  "rationale": "Hardest board move or problem sent in the session.",
+  "references": [],
+  "evidence": "coaching_practice",
+  "equipment": [
+   "kilter"
+  ],
+  "defaultGrip": "mixed"
+ }
+]

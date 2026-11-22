@@ -1,0 +1,1032 @@
+{
+ "_doc": "Session templates per block kind and sessions/week. Item fields: ex = exercise id; role; sets/reps/totalS overrides; rx = load prescription key (see planGenerator.ts PRESCRIPTIONS); priority (1 = keep, higher = trimmed first when a cap is exceeded); fromWeek (0-based week index in block); weakness (only included if that domain is in the top-3 weaknesses); requires ('tindeq'). Sessions are listed in order of importance: the LAST one is replaced first by an outdoor day.",
+ "testSessions": {
+  "a": {
+   "id": "test_a",
+   "title": "Assessment A — strength tests",
+   "kind": "test",
+   "location": "home",
+   "durationMin": 75,
+   "sessionRPE": 8,
+   "items": [
+    {
+     "ex": "test_max_hang",
+     "role": "main",
+     "rx": "none",
+     "priority": 1
+    },
+    {
+     "ex": "test_weighted_pullup",
+     "role": "main",
+     "rx": "none",
+     "priority": 1
+    },
+    {
+     "ex": "test_lockoff",
+     "role": "main",
+     "rx": "none",
+     "priority": 2
+    },
+    {
+     "ex": "test_front_lever",
+     "role": "main",
+     "rx": "none",
+     "priority": 2
+    },
+    {
+     "ex": "test_peak_force",
+     "role": "main",
+     "rx": "none",
+     "priority": 3,
+     "requires": "tindeq"
+    }
+   ]
+  },
+  "b": {
+   "id": "test_b",
+   "title": "Assessment B — endurance & power tests",
+   "kind": "test",
+   "location": "gym",
+   "durationMin": 90,
+   "sessionRPE": 8,
+   "items": [
+    {
+     "ex": "test_repeaters",
+     "role": "main",
+     "rx": "none",
+     "priority": 1
+    },
+    {
+     "ex": "test_board_max",
+     "role": "main",
+     "rx": "none",
+     "priority": 1
+    },
+    {
+     "ex": "test_critical_force",
+     "role": "main",
+     "rx": "none",
+     "priority": 3,
+     "requires": "tindeq"
+    }
+   ]
+  }
+ },
+ "prehab": {
+  "id": "prehab",
+  "title": "Finger prehab (short)",
+  "kind": "prehab",
+  "location": "home",
+  "durationMin": 12,
+  "sessionRPE": 3,
+  "items": [
+   {
+    "ex": "tendon_iso_low",
+    "role": "prehab",
+    "rx": "tendon_iso",
+    "priority": 1
+   },
+   {
+    "ex": "extensor_band",
+    "role": "prehab",
+    "priority": 2
+   },
+   {
+    "ex": "tendon_glides",
+    "role": "prehab",
+    "priority": 3
+   }
+  ]
+ },
+ "outdoor": {
+  "id": "outdoor",
+  "title": "Outdoor day",
+  "kind": "outdoor",
+  "location": "outdoor",
+  "durationMin": 240,
+  "sessionRPE": 7,
+  "items": [
+   {
+    "ex": "outdoor_day",
+    "role": "main",
+    "totalS": 12600,
+    "priority": 1
+   }
+  ]
+ },
+ "outdoorProjecting": {
+  "id": "outdoor_proj",
+  "title": "Outdoor projecting",
+  "kind": "projecting",
+  "location": "outdoor",
+  "durationMin": 240,
+  "sessionRPE": 8,
+  "items": [
+   {
+    "ex": "projecting_route",
+    "role": "main",
+    "totalS": 12600,
+    "priority": 1
+   }
+  ]
+ },
+ "blocks": {
+  "strength": {
+   "3": [
+    {
+     "id": "s_finger",
+     "title": "Finger strength + limit bouldering",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 3,
+       "rx": "max_hang",
+       "priority": 1
+      },
+      {
+       "ex": "max_hang_20_open",
+       "role": "main",
+       "sets": 2,
+       "rx": "max_hang_open",
+       "priority": 2
+      },
+      {
+       "ex": "limit_bouldering",
+       "role": "main",
+       "totalS": 2100,
+       "priority": 1
+      },
+      {
+       "ex": "weighted_pullup",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "pullup",
+       "priority": 3
+      }
+     ]
+    },
+    {
+     "id": "tech",
+     "title": "Technique & outdoor transfer",
+     "kind": "technique",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "tech_limestone_transfer",
+       "role": "main",
+       "priority": 1
+      },
+      {
+       "ex": "tech_silent_feet",
+       "role": "main",
+       "priority": 2,
+       "weakness": "technique_transfer"
+      },
+      {
+       "ex": "tech_kilter_vertical",
+       "role": "main",
+       "priority": 2
+      },
+      {
+       "ex": "tech_flag_drop_knee",
+       "role": "main",
+       "priority": 3
+      },
+      {
+       "ex": "front_lever_prog",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "bw",
+       "priority": 4
+      }
+     ]
+    },
+    {
+     "id": "s_board",
+     "title": "Board strength + pockets + core",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "board_power_moves",
+       "role": "main",
+       "sets": 4,
+       "priority": 1
+      },
+      {
+       "ex": "nohang_lift",
+       "role": "main",
+       "sets": 3,
+       "rx": "nohang",
+       "priority": 2
+      },
+      {
+       "ex": "pocket_hang_3f",
+       "role": "main",
+       "sets": 2,
+       "rx": "pocket3",
+       "fromWeek": 1,
+       "priority": 4
+      },
+      {
+       "ex": "lockoff_holds",
+       "role": "accessory",
+       "rx": "bw_added0",
+       "priority": 3
+      },
+      {
+       "ex": "front_lever_prog",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "bw",
+       "priority": 4
+      }
+     ]
+    }
+   ],
+   "2": [
+    {
+     "id": "s_finger2",
+     "title": "Finger strength + limit bouldering",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 3,
+       "rx": "max_hang",
+       "priority": 1
+      },
+      {
+       "ex": "max_hang_20_open",
+       "role": "main",
+       "sets": 2,
+       "rx": "max_hang_open",
+       "priority": 2
+      },
+      {
+       "ex": "limit_bouldering",
+       "role": "main",
+       "totalS": 2100,
+       "priority": 1
+      },
+      {
+       "ex": "weighted_pullup",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "pullup",
+       "priority": 3
+      }
+     ]
+    },
+    {
+     "id": "s_techboard",
+     "title": "Technique + board power",
+     "kind": "technique",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 7,
+     "items": [
+      {
+       "ex": "tech_limestone_transfer",
+       "role": "main",
+       "priority": 1
+      },
+      {
+       "ex": "tech_kilter_vertical",
+       "role": "main",
+       "totalS": 600,
+       "priority": 2
+      },
+      {
+       "ex": "board_power_moves",
+       "role": "main",
+       "sets": 3,
+       "priority": 2
+      },
+      {
+       "ex": "front_lever_prog",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "bw",
+       "priority": 4
+      }
+     ]
+    }
+   ],
+   "4": "3+free"
+  },
+  "power": {
+   "3": [
+    {
+     "id": "p_finger",
+     "title": "Finger maintenance + power",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 3,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "board_power_moves",
+       "role": "main",
+       "sets": 5,
+       "priority": 1
+      },
+      {
+       "ex": "campus_ladders",
+       "role": "main",
+       "sets": 3,
+       "priority": 4
+      },
+      {
+       "ex": "weighted_pullup",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "pullup",
+       "priority": 3
+      }
+     ]
+    },
+    {
+     "id": "tech",
+     "title": "Technique & outdoor transfer",
+     "kind": "technique",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "tech_limestone_transfer",
+       "role": "main",
+       "priority": 1
+      },
+      {
+       "ex": "tech_silent_feet",
+       "role": "main",
+       "priority": 2,
+       "weakness": "technique_transfer"
+      },
+      {
+       "ex": "tech_kilter_vertical",
+       "role": "main",
+       "priority": 2
+      },
+      {
+       "ex": "tech_flag_drop_knee",
+       "role": "main",
+       "priority": 3
+      },
+      {
+       "ex": "front_lever_prog",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "bw",
+       "priority": 4
+      }
+     ]
+    },
+    {
+     "id": "p_limit",
+     "title": "Limit bouldering + board EMOM",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "limit_bouldering",
+       "role": "main",
+       "totalS": 2400,
+       "priority": 1
+      },
+      {
+       "ex": "board_emom",
+       "role": "main",
+       "priority": 2
+      },
+      {
+       "ex": "pocket_hang_3f",
+       "role": "main",
+       "sets": 2,
+       "rx": "pocket3",
+       "priority": 4
+      },
+      {
+       "ex": "pocket_hang_2f",
+       "role": "main",
+       "sets": 2,
+       "rx": "pocket2",
+       "fromWeek": 1,
+       "priority": 5
+      }
+     ]
+    }
+   ],
+   "2": [
+    {
+     "id": "p_finger2",
+     "title": "Finger maintenance + limit bouldering",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 3,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "limit_bouldering",
+       "role": "main",
+       "totalS": 2100,
+       "priority": 1
+      },
+      {
+       "ex": "board_power_moves",
+       "role": "main",
+       "sets": 3,
+       "priority": 2
+      }
+     ]
+    },
+    {
+     "id": "tech",
+     "title": "Technique & outdoor transfer",
+     "kind": "technique",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "tech_limestone_transfer",
+       "role": "main",
+       "priority": 1
+      },
+      {
+       "ex": "tech_silent_feet",
+       "role": "main",
+       "priority": 2,
+       "weakness": "technique_transfer"
+      },
+      {
+       "ex": "tech_kilter_vertical",
+       "role": "main",
+       "priority": 2
+      },
+      {
+       "ex": "tech_flag_drop_knee",
+       "role": "main",
+       "priority": 3
+      },
+      {
+       "ex": "front_lever_prog",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "bw",
+       "priority": 4
+      }
+     ]
+    }
+   ],
+   "4": "3+free"
+  },
+  "performance": {
+   "3": [
+    {
+     "id": "f_finger",
+     "title": "Finger maintenance + 4x4",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 2,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "four_by_four",
+       "role": "main",
+       "priority": 1
+      },
+      {
+       "ex": "repeaters_7_3",
+       "role": "main",
+       "sets": 2,
+       "rx": "repeaters",
+       "priority": 3
+      },
+      {
+       "ex": "weighted_pullup",
+       "role": "accessory",
+       "sets": 2,
+       "rx": "pullup",
+       "priority": 4
+      }
+     ]
+    },
+    {
+     "id": "tech_pe",
+     "title": "Onsight simulation + intervals",
+     "kind": "technique",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 7,
+     "items": [
+      {
+       "ex": "tech_onsight_sim",
+       "role": "main",
+       "priority": 1
+      },
+      {
+       "ex": "tech_limestone_transfer",
+       "role": "main",
+       "priority": 2,
+       "totalS": 600
+      },
+      {
+       "ex": "board_intervals",
+       "role": "main",
+       "priority": 1
+      },
+      {
+       "ex": "front_lever_prog",
+       "role": "accessory",
+       "sets": 3,
+       "rx": "bw",
+       "priority": 4
+      }
+     ]
+    },
+    {
+     "id": "f_route",
+     "title": "Route / redpoint practice",
+     "kind": "projecting",
+     "location": "gym",
+     "durationMin": 120,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "projecting_route",
+       "role": "main",
+       "totalS": 4800,
+       "priority": 1
+      },
+      {
+       "ex": "arc",
+       "role": "accessory",
+       "totalS": 900,
+       "priority": 3
+      }
+     ]
+    }
+   ],
+   "2": [
+    {
+     "id": "f_finger2",
+     "title": "Finger maintenance + 4x4",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 2,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "four_by_four",
+       "role": "main",
+       "priority": 1
+      },
+      {
+       "ex": "tech_onsight_sim",
+       "role": "main",
+       "totalS": 600,
+       "priority": 2
+      }
+     ]
+    },
+    {
+     "id": "f_route2",
+     "title": "Route / redpoint practice",
+     "kind": "projecting",
+     "location": "gym",
+     "durationMin": 120,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "projecting_route",
+       "role": "main",
+       "totalS": 4800,
+       "priority": 1
+      }
+     ]
+    }
+   ],
+   "4": "3+free"
+  },
+  "projecting": {
+   "3": [
+    {
+     "id": "j_finger",
+     "title": "Finger maintenance (home, short)",
+     "kind": "training",
+     "location": "home",
+     "durationMin": 40,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 2,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "nohang_lift",
+       "role": "main",
+       "sets": 2,
+       "rx": "nohang",
+       "grip": "open_hand",
+       "priority": 2
+      }
+     ],
+     "warmup": "finger_only"
+    },
+    {
+     "id": "j_proj",
+     "title": "Projecting",
+     "kind": "projecting",
+     "location": "outdoor",
+     "durationMin": 240,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "projecting_route",
+       "role": "main",
+       "totalS": 10800,
+       "priority": 1
+      }
+     ]
+    },
+    {
+     "id": "j_free",
+     "title": "Free climbing / projecting",
+     "kind": "free",
+     "location": "gym",
+     "durationMin": 90,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "free_climb",
+       "role": "main",
+       "totalS": 4800,
+       "priority": 1
+      }
+     ]
+    }
+   ],
+   "2": [
+    {
+     "id": "j_finger2",
+     "title": "Finger maintenance (home, short)",
+     "kind": "training",
+     "location": "home",
+     "durationMin": 40,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 2,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "nohang_lift",
+       "role": "main",
+       "sets": 2,
+       "rx": "nohang",
+       "grip": "open_hand",
+       "priority": 2
+      }
+     ],
+     "warmup": "finger_only"
+    },
+    {
+     "id": "j_proj2",
+     "title": "Projecting",
+     "kind": "projecting",
+     "location": "outdoor",
+     "durationMin": 240,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "projecting_route",
+       "role": "main",
+       "totalS": 10800,
+       "priority": 1
+      }
+     ]
+    }
+   ],
+   "4": "3+free"
+  },
+  "maintenance": {
+   "2": [
+    {
+     "id": "m_finger",
+     "title": "Maintenance: fingers + limit",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 60,
+     "sessionRPE": 7,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 3,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "limit_bouldering",
+       "role": "main",
+       "totalS": 1500,
+       "priority": 1
+      }
+     ]
+    },
+    {
+     "id": "m_tech",
+     "title": "Maintenance: technique + board",
+     "kind": "technique",
+     "location": "gym",
+     "durationMin": 60,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "tech_limestone_transfer",
+       "role": "main",
+       "totalS": 900,
+       "priority": 1
+      },
+      {
+       "ex": "board_power_moves",
+       "role": "main",
+       "sets": 3,
+       "priority": 2
+      },
+      {
+       "ex": "front_lever_prog",
+       "role": "accessory",
+       "sets": 2,
+       "rx": "bw",
+       "priority": 4
+      }
+     ]
+    }
+   ]
+  },
+  "newborn": {
+   "2": [
+    {
+     "id": "n_a",
+     "title": "Home fingers A (minimum dose)",
+     "kind": "training",
+     "location": "home",
+     "durationMin": 35,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 3,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "nohang_lift",
+       "role": "main",
+       "sets": 2,
+       "rx": "nohang",
+       "priority": 2
+      },
+      {
+       "ex": "tendon_iso_low",
+       "role": "prehab",
+       "rx": "tendon_iso",
+       "priority": 3
+      }
+     ],
+     "warmup": "finger_only"
+    },
+    {
+     "id": "n_b",
+     "title": "Home fingers B (minimum dose)",
+     "kind": "training",
+     "location": "home",
+     "durationMin": 35,
+     "sessionRPE": 6,
+     "items": [
+      {
+       "ex": "nohang_lift",
+       "role": "main",
+       "sets": 3,
+       "rx": "nohang",
+       "grip": "open_hand",
+       "priority": 1
+      },
+      {
+       "ex": "weighted_pullup",
+       "role": "main",
+       "sets": 3,
+       "rx": "pullup",
+       "priority": 2
+      },
+      {
+       "ex": "front_lever_prog",
+       "role": "accessory",
+       "sets": 2,
+       "rx": "bw",
+       "priority": 3
+      },
+      {
+       "ex": "tendon_iso_low",
+       "role": "prehab",
+       "rx": "tendon_iso",
+       "priority": 3
+      }
+     ],
+     "warmup": "finger_only"
+    }
+   ],
+   "bonus": {
+    "id": "n_bonus",
+    "title": "Bonus: climbing if time allows",
+    "kind": "free",
+    "location": "gym",
+    "durationMin": 75,
+    "sessionRPE": 6,
+    "items": [
+     {
+      "ex": "free_climb",
+      "role": "main",
+      "totalS": 3600,
+      "priority": 1
+     }
+    ],
+    "optional": true
+   }
+  },
+  "taper": {
+   "3": [
+    {
+     "id": "t_finger",
+     "title": "Taper: short finger + limit",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 60,
+     "sessionRPE": 7,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 2,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "limit_bouldering",
+       "role": "main",
+       "totalS": 1200,
+       "priority": 1
+      }
+     ]
+    },
+    {
+     "id": "t_tech",
+     "title": "Taper: easy technique",
+     "kind": "technique",
+     "location": "gym",
+     "durationMin": 60,
+     "sessionRPE": 5,
+     "items": [
+      {
+       "ex": "tech_onsight_sim",
+       "role": "main",
+       "totalS": 1200,
+       "priority": 1
+      }
+     ]
+    },
+    {
+     "id": "t_proj",
+     "title": "Performance day",
+     "kind": "projecting",
+     "location": "outdoor",
+     "durationMin": 240,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "projecting_route",
+       "role": "main",
+       "totalS": 10800,
+       "priority": 1
+      }
+     ]
+    }
+   ],
+   "2": [
+    {
+     "id": "t_finger2",
+     "title": "Taper: short finger + limit",
+     "kind": "training",
+     "location": "gym",
+     "durationMin": 60,
+     "sessionRPE": 7,
+     "items": [
+      {
+       "ex": "max_hang_20_hc",
+       "role": "main",
+       "sets": 2,
+       "rx": "max_hang_maint",
+       "priority": 1
+      },
+      {
+       "ex": "limit_bouldering",
+       "role": "main",
+       "totalS": 1200,
+       "priority": 1
+      }
+     ]
+    },
+    {
+     "id": "t_proj2",
+     "title": "Performance day",
+     "kind": "projecting",
+     "location": "outdoor",
+     "durationMin": 240,
+     "sessionRPE": 8,
+     "items": [
+      {
+       "ex": "projecting_route",
+       "role": "main",
+       "totalS": 10800,
+       "priority": 1
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "aliases": {
+  "power_endurance": "performance",
+  "return_ramp": "strength"
+ },
+ "freeSession": {
+  "id": "free",
+  "title": "Free climbing",
+  "kind": "free",
+  "location": "gym",
+  "durationMin": 90,
+  "sessionRPE": 6,
+  "items": [
+   {
+    "ex": "free_climb",
+    "role": "main",
+    "totalS": 4800,
+    "priority": 1
+   }
+  ]
+ }
+}

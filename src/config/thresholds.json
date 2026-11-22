@@ -1,0 +1,148 @@
+{
+  "_doc": "Load & safety thresholds. Edit values here; engines read them at runtime. Evidence labels: 'research' = backed by cited literature, 'coaching_practice' = conventional coaching value, not validated.",
+  "acwr": {
+    "acuteDays": 7,
+    "chronicDays": 28,
+    "calibrationDays": 28,
+    "zones": {
+      "lowBelow": 0.8,
+      "greenMax": 1.3,
+      "orangeMax": 1.5
+    },
+    "evidence": "research",
+    "references": [
+      "foster2001",
+      "gabbett2016",
+      "williams2017",
+      "murray2017",
+      "impellizzeri2020"
+    ],
+    "note": "ACWR is scientifically debated (Impellizzeri et al. 2020). It is used here as a warning signal to prompt reflection, never as an injury predictor."
+  },
+  "weekOnWeek": {
+    "globalFlagPct": 15,
+    "fingerFlagPct": 15,
+    "fingerIncreaseCapPct": 10,
+    "minBaselineForPctFlag": 20,
+    "evidence": "coaching_practice"
+  },
+  "fingerLoad": {
+    "_doc": "Finger-load units (FLU) = seconds under finger load x relative intensity^exponent x grip factor x edge factor / 10. All factors are coaching-practice estimates, not validated measurements.",
+    "evidence": "coaching_practice",
+    "secondsPerUnit": 10,
+    "intensityExponent": 1,
+    "defaultMaxHangTotalBwRatio": 1.3,
+    "intensityClamp": [
+      0.2,
+      1.3
+    ],
+    "intensityFactor": {
+      "none": 0,
+      "low": 0.3,
+      "moderate": 0.55,
+      "high": 0.8,
+      "max": 1.0
+    },
+    "gripFactor": {
+      "half_crimp": 1.0,
+      "open_hand": 0.85,
+      "full_crimp": 1.4,
+      "pocket_2f_front": 1.4,
+      "pocket_2f_middle": 1.3,
+      "pocket_3f": 1.15,
+      "mono": 1.8,
+      "pinch": 0.8,
+      "sloper": 0.75,
+      "jug": 0.3,
+      "mixed": 1.0
+    },
+    "edgeReferenceMm": 20,
+    "edgeFactorClamp": [
+      0.8,
+      1.4
+    ],
+    "climbing": {
+      "_doc": "Estimated minutes actually on holds. Used when no explicit estimate is logged.",
+      "boulderAttemptMin": 0.4,
+      "routeBurnMin": 2.5,
+      "fallbackOnHoldsFractionByKind": {
+        "training": 0.12,
+        "technique": 0.15,
+        "free": 0.15,
+        "projecting": 0.12,
+        "outdoor": 0.12,
+        "test": 0.05,
+        "prehab": 0,
+        "other_sport": 0
+      },
+      "gradeDeltaToIntensity": [
+        {
+          "minDelta": 0,
+          "intensity": "max"
+        },
+        {
+          "minDelta": -2,
+          "intensity": "high"
+        },
+        {
+          "minDelta": -5,
+          "intensity": "moderate"
+        },
+        {
+          "minDelta": -99,
+          "intensity": "low"
+        }
+      ]
+    }
+  },
+  "restrictedGrips": {
+    "_doc": "Full crimp, 2-finger pockets and monos: tracked separately for A2 protection.",
+    "evidence": "coaching_practice",
+    "maxShareOfFingerLoadPct": 25,
+    "weeklyIncreaseCapPct": 10
+  },
+  "coldStart": {
+    "evidence": "coaching_practice",
+    "calibratingLabel": "Calibrating — ACWR becomes meaningful after 4 weeks of logs. Until then, week-on-week limits and absolute finger-load caps apply."
+  },
+  "timer": {
+    "_doc": "Guided timer defaults.",
+    "prepareS": 5,
+    "countdownLastS": 3,
+    "voiceLang": "en-GB",
+    "beepWorkHz": 880,
+    "beepRestHz": 440,
+    "beepCountHz": 660,
+    "vibrateWorkMs": [
+      200
+    ],
+    "vibrateRestMs": [
+      100,
+      80,
+      100
+    ]
+  },
+  "tindeq": {
+    "_doc": "Tindeq Progressor processing. Asymmetry watch is EXPERIMENTAL: a 'watch' signal, never a diagnosis.",
+    "evidence": "coaching_practice",
+    "targetBandPct": 5,
+    "loadOnsetKg": 2,
+    "repeaterDropPct": 15,
+    "repeaterDropConsecutive": 2,
+    "repeaterReferenceReps": 2,
+    "repeaterMinRepFractionAboveOnset": 0.6,
+    "criticalForceLastReps": 6,
+    "asymmetryWatchPct": 10,
+    "baselineDropWatchPct": 10,
+    "baselineWindowDays": 90,
+    "baselineMaxTests": 5,
+    "baselineMinTests": 2,
+    "curveMaxPoints": 400,
+    "reconnectAttempts": 3,
+    "reconnectBackoffMs": [
+      500,
+      1500,
+      4000
+    ]
+  }
+}

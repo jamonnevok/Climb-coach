@@ -1,0 +1,38 @@
+{
+  "_doc": "GENERIC graded return-to-climbing protocols. Not medical advice. A diagnosis by a physiotherapist or physician always overrides these stages. Advance one stage only when pain is <= 2/10 during and not worse next morning (pain-monitoring model).",
+  "disclaimer": "These are generic, educational progressions and not a diagnosis or treatment plan. If you have an audible pop, bowstringing, swelling, pain at rest above 3/10 or no improvement after 2 weeks, stop climbing and see a physiotherapist or sports physician.",
+  "protocols": {
+    "pulley_strain": {
+      "name": "Finger pulley strain (suspected grade I-II)",
+      "references": ["schoffl2003", "miro2021", "schoffl2007tape"],
+      "evidence": "coaching_practice",
+      "stages": [
+        { "stage": 1, "minDays": 7, "title": "Protect & move", "content": ["Daily tendon glides and pain-free range of motion", "No climbing or hangboarding with the injured finger", "Rest of training: legs, core, antagonists"] },
+        { "stage": 2, "minDays": 7, "title": "Low-load isometrics", "content": ["No-hang / loading pin, open hand, 20-30 % of healthy-hand peak, 6 x 30 s", "Progress 5 % per session if pain <= 2/10", "Tape (H-tape) as advised by your physio"] },
+        { "stage": 3, "minDays": 14, "title": "Easy climbing, open hand", "content": ["Jugs and big open-hand holds only, vertical terrain", "Isometrics progress to 50-60 %", "No crimping, no pockets on the injured finger"] },
+        { "stage": 4, "minDays": 14, "title": "Progressive grips", "content": ["Half crimp reintroduced on large edges", "Board/steep climbing at moderate grades", "Hangboard back to ~70 % of pre-injury loads"] },
+        { "stage": 5, "minDays": 14, "title": "Return to full training", "content": ["Max hangs from ~85 % of pre-injury loads", "Full crimp and 2-finger pockets last, low volume"] }
+      ]
+    },
+    "elbow_tendinopathy": {
+      "name": "Elbow tendinopathy (medial or lateral)",
+      "references": ["silbernagel2007"],
+      "evidence": "coaching_practice",
+      "stages": [
+        { "stage": 1, "minDays": 7, "title": "Calm down", "content": ["Reduce aggravating volume (pull-ups, steep board)", "Isometric wrist flexion/extension holds 5 x 45 s, pain <= 3/10"] },
+        { "stage": 2, "minDays": 14, "title": "Isotonic loading", "content": ["Slow wrist curls/extensions 3 x 15, 3 x per week", "Climbing allowed under the pain-monitoring rules"] },
+        { "stage": 3, "minDays": 14, "title": "Heavy slow resistance", "content": ["Heavier wrist work 4 x 8", "Reintroduce pulling and board climbing progressively"] }
+      ]
+    },
+    "shoulder": {
+      "name": "Shoulder irritation (non-traumatic)",
+      "references": [],
+      "evidence": "coaching_practice",
+      "stages": [
+        { "stage": 1, "minDays": 7, "title": "Settle", "content": ["Avoid painful ranges (wide gastons, deep lock-offs)", "Scapular setting, band external rotations 3 x 15"] },
+        { "stage": 2, "minDays": 14, "title": "Rebuild", "content": ["Progressive rotator-cuff and scapular strength", "Vertical climbing, controlled moves"] },
+        { "stage": 3, "minDays": 14, "title": "Return", "content": ["Steep climbing and dynamic moves reintroduced", "Pull-ups and lock-offs back to prior loads"] }
+      ]
+    }
+  }
+}
